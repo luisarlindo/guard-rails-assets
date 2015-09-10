@@ -50,27 +50,26 @@ module Guard
         warn "Cannot precompile assets if sprockets is disabled. Enabling it."
         config.assets.enabled = true
       end
-      Rake::Task["assets:precompile"].execute
 
-      # # Ensure that action view is loaded and the appropriate
-      # # sprockets hooks get executed
-      # _ = ActionView::Base
+      # Ensure that action view is loaded and the appropriate
+      # sprockets hooks get executed
+      _ = ActionView::Base
 
-      # digest = @@digest.nil? ? config.assets.digest : @@digest
+      digest = @@digest.nil? ? config.assets.digest : @@digest
 
-      # config.assets.compile = true
-      # config.assets.digest  = digest
-      # config.assets.digests = {}
+      config.assets.compile = true
+      config.assets.digest  = digest
+      config.assets.digests = {}
 
-      # env      = ::Rails.application.assets
-      # target   = File.join(::Rails.public_path, config.assets.prefix)
-      # compiler = Sprockets::StaticCompiler.new(env,
-      #                                          target,
-      #                                          config.assets.precompile,
-      #                                          :manifest_path => config.assets.manifest,
-      #                                          :digest => config.assets.digest,
-      #                                          :manifest => config.assets.digest.nil?)
-      # compiler.compile
+      env      = ::Rails.application.assets
+      target   = File.join(::Rails.public_path, config.assets.prefix)
+      compiler = Sprockets::StaticCompiler.new(env,
+                                               target,
+                                               config.assets.precompile,
+                                               :manifest_path => config.assets.manifest,
+                                               :digest => config.assets.digest,
+                                               :manifest => config.assets.digest.nil?)
+      compiler.compile
     end
 
 
