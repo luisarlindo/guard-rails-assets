@@ -45,12 +45,12 @@ module Guard
     end
 
     def precompile
-      system 'rake assets:precompile'
-      # config = ::Rails.application.config
-      # unless config.assets.enabled
-      #   warn "Cannot precompile assets if sprockets is disabled. Enabling it."
-      #   config.assets.enabled = true
-      # end
+      config = ::Rails.application.config
+      unless config.assets.enabled
+        warn "Cannot precompile assets if sprockets is disabled. Enabling it."
+        config.assets.enabled = true
+      end
+      Rake::Task["assets:precompile"].execute
 
       # # Ensure that action view is loaded and the appropriate
       # # sprockets hooks get executed
